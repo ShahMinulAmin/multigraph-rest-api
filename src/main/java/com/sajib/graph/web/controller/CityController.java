@@ -6,9 +6,11 @@ import com.sajib.graph.exception.ResourceNotFoundException;
 import com.sajib.graph.service.CityService;
 import com.sajib.graph.web.model.CityDto;
 import com.sajib.graph.web.model.DtoBuilder;
+import com.sajib.graph.web.validator.CityDtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,6 +23,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/cities")
 public class CityController {
+
+    @InitBinder("cityDto")
+    protected void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.setValidator(new CityDtoValidator());
+    }
+
+
     @Autowired
     EntityBuilder entityBuilder;
 
