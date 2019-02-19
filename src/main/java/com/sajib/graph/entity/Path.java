@@ -52,6 +52,16 @@ public class Path {
         this.cost = cost;
     }
 
+    public Path(Integer id, City fromCity, City toCity, Integer container, String transportType,
+                Integer duration, Integer cost) {
+        this.fromCity = fromCity;
+        this.toCity = toCity;
+        this.container = container;
+        this.transportType = transportType;
+        this.duration = duration;
+        this.cost = cost;
+    }
+
     public Integer getId() {
         return id;
     }
