@@ -1,10 +1,15 @@
 package com.sajib.graph.service;
 
 import com.sajib.graph.core.GeoCodingUtil;
+import com.sajib.graph.dao.PreferenceDao;
+import com.sajib.graph.dao.SearchDAO;
+import com.sajib.graph.entity.Preference;
 import com.sajib.graph.types.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by sajib on 2/20/19.
@@ -12,14 +17,23 @@ import java.util.*;
 @Component
 public class PlaceSearchImpl implements PlaceSearch<String, EdgeProperty, Coordinate, ResultRoute> {
 
+    private static final Logger LOG = Logger.getLogger(PlaceSearchImpl.class.getName());
+
+    @Autowired
+    private PreferenceDao preferenceDao;
+
     private List<ResultRoute> combinedResultRouteList = new ArrayList<>();
 
     @Override
     public List<ResultRoute> searchFromLocation(Multigraph<String, EdgeProperty> multigraph, Map<String, Coordinate> coordinateMap,
                                                 String source, String destination) {
         if (!coordinateMap.containsKey(destination)) {
+            Preference preference = preferenceDao.findByName(GeoCodingUtil.PREFERENCE_GEOCODE_API_KEY);
+            String apiKey = preference.getValue();
+            LOG.info("Google geocode API Key: " + preference.getValue());
+
             // get nearest locations
-            List<String> derivedDestinations = GeoCodingUtil.getDerivedDestinations(coordinateMap, destination);
+            List<String> derivedDestinations = GeoCodingUtil.getDerivedDestinations(coordinateMap, destination, apiKey);
             List<ResultRoute> derivedResults = new ArrayList<>();
 
             // find route for each derived desinations

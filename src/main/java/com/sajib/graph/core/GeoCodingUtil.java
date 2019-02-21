@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.logging.StreamHandler;
 
 /**
  * Created by sajib on 2/20/19.
@@ -17,9 +18,11 @@ public class GeoCodingUtil {
 
     private static final Logger LOG = Logger.getLogger(GeoCodingUtil.class.getName());
 
-    public static List<String> getDerivedDestinations(Map<String, Coordinate> coordinateMap, String destionation) {
+    public static final String PREFERENCE_GEOCODE_API_KEY = "Google geocode API Key";
+
+    public static List<String> getDerivedDestinations(Map<String, Coordinate> coordinateMap, String destionation, String apiKey) {
         // get coordiate of destionation by reverse geocoding
-        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyC8-HBw08K4PVZpXE5PtGIPKrjU_t1Nuhg");
+        GeoApiContext context = new GeoApiContext().setApiKey(apiKey);
         GeocodingResult[] results = new GeocodingResult[0];
         try {
             results = GeocodingApi.geocode(context, destionation).await();
