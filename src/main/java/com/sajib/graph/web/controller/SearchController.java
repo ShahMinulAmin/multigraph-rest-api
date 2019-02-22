@@ -4,6 +4,7 @@ import com.sajib.graph.service.SearchService;
 import com.sajib.graph.types.ResultRoute;
 import com.sajib.graph.types.SearchError;
 import com.sajib.graph.types.SearchResult;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ public class SearchController {
     @Autowired
     SearchService searchService;
 
-
+    @ApiOperation(value = "Find routes of multigraph with given source, destination and other parameters")
     @PostMapping()
     public Object routeSearch(@RequestBody SearchParams params) {
 

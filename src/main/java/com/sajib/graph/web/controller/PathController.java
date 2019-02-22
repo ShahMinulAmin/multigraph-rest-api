@@ -7,6 +7,7 @@ import com.sajib.graph.service.PathService;
 import com.sajib.graph.web.model.DtoBuilder;
 import com.sajib.graph.web.model.PathDto;
 import com.sajib.graph.web.validator.PathDtoValidator;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class PathController {
     @Autowired
     private PathService pathService;
 
+    @ApiOperation(value = "Returns list of all paths")
     @GetMapping()
     public List<PathDto> getAllPaths() {
         List<Path> pathList = pathService.getAllPaths();
@@ -44,6 +46,7 @@ public class PathController {
         return pathDtos;
     }
 
+    @ApiOperation(value = "Returns a path by id")
     @GetMapping("/{id}")
     public ResponseEntity<PathDto> getOnePath(@PathVariable(value = "id") Integer id)
             throws ResourceNotFoundException {
@@ -55,6 +58,7 @@ public class PathController {
         return ResponseEntity.ok().body(pathDto);
     }
 
+    @ApiOperation(value = "Stores a new path")
     @PostMapping()
     public ResponseEntity<PathDto> addPath(@Valid @RequestBody PathDto pathDto) {
         Path path = entityBuilder.buildPathEntity(pathDto);
@@ -66,6 +70,7 @@ public class PathController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPathDto);
     }
 
+    @ApiOperation(value = "Updates an existing path")
     @PutMapping("/{id}")
     public ResponseEntity<PathDto> updatePath(@PathVariable(value = "id") Integer id,
                                               @Valid @RequestBody PathDto pathDtoToUpdate)

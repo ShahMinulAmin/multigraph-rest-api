@@ -7,6 +7,7 @@ import com.sajib.graph.service.CityService;
 import com.sajib.graph.web.model.CityDto;
 import com.sajib.graph.web.model.DtoBuilder;
 import com.sajib.graph.web.validator.CityDtoValidator;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,7 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
+    @ApiOperation(value = "Returns list of all cities")
     @GetMapping()
     public List<CityDto> getAllCities() {
         List<City> cityList = cityService.getAllCities();
@@ -45,6 +47,7 @@ public class CityController {
         return cityDtos;
     }
 
+    @ApiOperation(value = "Returns a city by id")
     @GetMapping("/{id}")
     public ResponseEntity<CityDto> getOneCity(@PathVariable(value = "id") Integer id)
             throws ResourceNotFoundException {
@@ -56,6 +59,7 @@ public class CityController {
         return ResponseEntity.ok().body(cityDto);
     }
 
+    @ApiOperation(value = "Stores a new city")
     @PostMapping()
     public ResponseEntity<CityDto> addCity(@Valid @RequestBody CityDto cityDto) {
         City city = entityBuilder.buildCityEntity(cityDto);
@@ -67,6 +71,7 @@ public class CityController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCityDto);
     }
 
+    @ApiOperation(value = "Updates an existing city")
     @PutMapping("/{id}")
     public ResponseEntity<CityDto> updateCity(@PathVariable(value = "id") Integer id,
                                               @Valid @RequestBody CityDto cityDtoToUpdate)
