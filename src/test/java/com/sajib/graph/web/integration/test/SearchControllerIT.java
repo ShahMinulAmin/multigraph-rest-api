@@ -1,7 +1,6 @@
 package com.sajib.graph.web.integration.test;
 
 import com.sajib.graph.Application;
-import com.sajib.graph.types.ResultRoute;
 import com.sajib.graph.web.unit.test.SearchController;
 import com.sajib.graph.web.util.JsonResponses;
 import com.sajib.graph.web.util.JsonUtil;
@@ -17,10 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -174,6 +171,6 @@ public class SearchControllerIT {
 
         // Assert
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.errorMessage", is("Mandatory parameter missing.")));
+                .andExpect(jsonPath("$.errorMessage", is(JsonResponses.JSON_RESPONSE_MANDATORY_PARAM_MISSING)));
     }
 }

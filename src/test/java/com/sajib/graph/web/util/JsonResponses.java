@@ -510,4 +510,5 @@ public class JsonResponses {
             "    ]\n" +
             "}";
 
+    public static final String JSON_RESPONSE_MANDATORY_PARAM_MISSING = "Mandatory parameter missing.";
 }

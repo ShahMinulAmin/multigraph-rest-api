@@ -143,6 +143,6 @@ public class SearchControllerTests {
 
         // Assert
         result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.errorMessage", is("Mandatory parameter missing.")));
+                .andExpect(jsonPath("$.errorMessage", is(JsonResponses.JSON_RESPONSE_MANDATORY_PARAM_MISSING)));
     }
 }
