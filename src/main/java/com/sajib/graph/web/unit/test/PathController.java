@@ -1,4 +1,4 @@
-package com.sajib.graph.web.controller;
+package com.sajib.graph.web.unit.test;
 
 import com.sajib.graph.entity.EntityBuilder;
 import com.sajib.graph.entity.Path;

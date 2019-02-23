@@ -1,4 +1,4 @@
-package com.sajib.graph.web.controller;
+package com.sajib.graph.web.unit.test;
 
 import com.sajib.graph.Application;
 import com.sajib.graph.entity.City;
