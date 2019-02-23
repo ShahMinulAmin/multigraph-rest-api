@@ -1,7 +1,7 @@
 package com.sajib.graph.web.integration.test;
 
 import com.sajib.graph.Application;
-import com.sajib.graph.web.unit.test.SearchController;
+import com.sajib.graph.web.controller.SearchController;
 import com.sajib.graph.web.util.JsonResponses;
 import com.sajib.graph.web.util.JsonUtil;
 import org.junit.Test;

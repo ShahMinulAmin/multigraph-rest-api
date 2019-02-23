@@ -1,4 +1,4 @@
-package com.sajib.graph.web.unit.test;
+package com.sajib.graph.web.controller;
 
 import com.sajib.graph.service.SearchService;
 import com.sajib.graph.types.ResultRoute;

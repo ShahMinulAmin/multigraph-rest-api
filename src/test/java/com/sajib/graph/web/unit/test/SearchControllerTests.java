@@ -4,6 +4,7 @@ import com.sajib.graph.Application;
 import com.sajib.graph.service.SearchService;
 import com.sajib.graph.types.ResultPath;
 import com.sajib.graph.types.ResultRoute;
+import com.sajib.graph.web.controller.SearchController;
 import com.sajib.graph.web.util.JsonResponses;
 import com.sajib.graph.web.util.JsonUtil;
 import org.junit.Test;
