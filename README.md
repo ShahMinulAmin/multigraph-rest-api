@@ -26,3 +26,13 @@ RESTful API to find all possible routes of a multigraph.
   * To package the project to jar, without running the integration tests:  
   `$ mvn clean install -DskipITs`
   
+### REST API Documentation
+  * Swagger is used for REST API documentation. You can read the documentation using the following link:  
+  http://localhost:8090/swagger-ui.html  
+  List of available REST APIs can be found from the above link. Here is a sample screenshot:  
+  
+  ![](../assets/images/swagger-ui.png)
+  
+  * Detailed description of a REST API can be found clicking on the row of that API. Here is a sample screenshot:
+  
+  ![](../assets/images/swagger-rest-doc.png)
