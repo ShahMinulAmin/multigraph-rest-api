@@ -124,4 +124,25 @@ public class SearchControllerTests {
 
     }
 
+    @Test
+    public void MissingParam_SearchRoute_ReturnErrorMsg() throws Exception {
+        SearchController.SearchParams searchParams = new SearchController.SearchParams();
+        searchParams.from = "Vasastan";
+        searchParams.to = "Liseberg";
+
+        List<ResultRoute> resultRouteList = new ArrayList<>();
+
+        // Arrange
+        when(searchService.searchFromLocation(searchParams.from, searchParams.to,
+                null, null, null, null, null, null))
+                .thenReturn(resultRouteList);
+
+        // Act
+        ResultActions result = mockMvc.perform(post("/api/v1/routes").contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.toJson(searchParams)));
+
+        // Assert
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.errorMessage", is("Mandatory parameter missing.")));
+    }
 }

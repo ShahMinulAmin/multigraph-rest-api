@@ -1,6 +1,7 @@
 package com.sajib.graph.web.integration.test;
 
 import com.sajib.graph.Application;
+import com.sajib.graph.types.ResultRoute;
 import com.sajib.graph.web.unit.test.SearchController;
 import com.sajib.graph.web.util.JsonResponses;
 import com.sajib.graph.web.util.JsonUtil;
@@ -16,8 +17,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -157,5 +160,20 @@ public class SearchControllerIT {
                 .andExpect(jsonPath("$.routes[1].costOfRoute", is(4373)))
                 .andExpect(jsonPath("$.routes[1].durationOfRoute", is(24)));
 
+    }
+
+    @Test
+    public void MissingParam_SearchRoute_ReturnErrorMsg() throws Exception {
+        SearchController.SearchParams searchParams = new SearchController.SearchParams();
+        searchParams.from = "Vasastan";
+        searchParams.to = "Liseberg";
+
+        // Act
+        ResultActions result = mockMvc.perform(post("/api/v1/routes").contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.toJson(searchParams)));
+
+        // Assert
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.errorMessage", is("Mandatory parameter missing.")));
     }
 }

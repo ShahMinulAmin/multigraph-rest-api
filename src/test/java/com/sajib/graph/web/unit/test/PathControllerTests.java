@@ -124,6 +124,14 @@ public class PathControllerTests {
                 .andExpect(jsonPath("$.cost", is(280)));
     }
 
+    @Test
+    public void WrongPathId_GetPath_ReturnNotFound() throws Exception {
+        ResultActions result = mockMvc.perform(get("/api/v1/paths/{id}", "200")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isNotFound());
+    }
+
 }
 
 

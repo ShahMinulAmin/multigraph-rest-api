@@ -28,6 +28,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -104,5 +105,13 @@ public class CityControllerTests {
 
         result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("Vasastan, Stockholm")));
+    }
+
+    @Test
+    public void WrongCityId_GetCity_ReturnNotFound() throws Exception {
+        ResultActions result = mockMvc.perform(get("/api/v1/cities/{id}", "130")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        result.andExpect(status().isNotFound());
     }
 }
