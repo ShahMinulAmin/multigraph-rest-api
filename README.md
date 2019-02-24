@@ -129,4 +129,149 @@ The REST APIs can be tested using popular REST client like Postman. Since Swagge
        "duration": 1,
        "cost": 1220
      }
+     ```  
+       
+  * Search controller:
+    1. POST request to find all routes between a source and a destination.  
+    `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "container": 20, "from": "Vasastan", "to": "Maitland", "transportTypes": [ "Road", "Ocean" ] }' 'http://localhost:8090/api/v1/routes'`   
+    * Response body:
      ```
+     {
+       "routes": [
+         {
+           "route": [
+             {
+               "start": "Vasastan",
+               "end": "Liseberg",
+               "modeOfTransport": "Road",
+               "cost": 480,
+               "daysTaken": 1
+             },
+             {
+               "start": "Liseberg",
+               "end": "Oakland Park",
+               "modeOfTransport": "Ocean",
+               "cost": 1673,
+               "daysTaken": 22
+             },
+             {
+               "start": "Oakland Park",
+               "end": "Maitland",
+               "modeOfTransport": "Road",
+               "cost": 650,
+               "daysTaken": 1
+             }
+           ],
+           "costOfRoute": 2803,
+           "durationOfRoute": 24
+         },
+         {
+           "route": [
+             {
+               "start": "Vasastan",
+               "end": "Liseberg",
+               "modeOfTransport": "Road",
+               "cost": 480,
+               "daysTaken": 1
+             },
+             {
+               "start": "Liseberg",
+               "end": "Georgia",
+               "modeOfTransport": "Ocean",
+               "cost": 1815,
+               "daysTaken": 23
+             },
+             {
+               "start": "Georgia",
+               "end": "Maitland",
+               "modeOfTransport": "Road",
+               "cost": 650,
+               "daysTaken": 1
+             }
+           ],
+           "costOfRoute": 2945,
+           "durationOfRoute": 25
+         },
+         {
+           "route": [
+             {
+               "start": "Vasastan",
+               "end": "Gouda",
+               "modeOfTransport": "Road",
+               "cost": 1480,
+               "daysTaken": 3
+             },
+             {
+               "start": "Gouda",
+               "end": "Oakland Park",
+               "modeOfTransport": "Ocean",
+               "cost": 1673,
+               "daysTaken": 18
+             },
+             {
+               "start": "Oakland Park",
+               "end": "Maitland",
+               "modeOfTransport": "Road",
+               "cost": 650,
+               "daysTaken": 1
+             }
+           ],
+           "costOfRoute": 3803,
+           "durationOfRoute": 22
+         }
+       ]
+     }
+     ```  
+     
+    2. POST request to find all routes between a source and a destination. Here one location will not be directly available in the system. A nearby location will be used if it is available.  
+    `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "container": 20, "from": "Himchari", "to": "Banani", "transportTypes": [ "All" ] }' 'http://localhost:8090/api/v1/routes'`  
+      
+    * Response body:
+     ```
+     {
+       "routes": [
+         {
+           "route": [
+             {
+               "start": "Himchari",
+               "end": "Kaptai",
+               "modeOfTransport": "Road",
+               "cost": 100,
+               "daysTaken": 1
+             },
+             {
+               "start": "Kaptai",
+               "end": "Karail",
+               "modeOfTransport": "Road",
+               "cost": 115,
+               "daysTaken": 1
+             }
+           ],
+           "costOfRoute": 215,
+           "durationOfRoute": 2
+         },
+         {
+           "route": [
+             {
+               "start": "Himchari",
+               "end": "Kaptai",
+               "modeOfTransport": "Road",
+               "cost": 100,
+               "daysTaken": 1
+             },
+             {
+               "start": "Kaptai",
+               "end": "Agargaon",
+               "modeOfTransport": "Road",
+               "cost": 112,
+               "daysTaken": 1
+             }
+           ],
+           "costOfRoute": 212,
+           "durationOfRoute": 2
+         }
+       ]
+     }
+     ```  
+     
+     
