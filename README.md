@@ -78,4 +78,55 @@ The REST APIs can be tested using popular REST client like Postman. Since Swagge
          "latitude": 22.845641,
          "longitude": 89.5403279
        }
-      ``` 
+      ```  
+        
+  * Path controller:  
+    1. GET request to get list of all paths  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/paths'`  
+
+    2. GET request to get one path by id  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/paths/1'`
+
+     * Response body:  
+     ```
+     {
+       "id": 1,
+       "fromCity": "Vasastan",
+       "toCity": "Liseberg",
+       "container": 20,
+       "transportType": "Road",
+       "duration": 1,
+       "cost": 480
+     }
+     ```  
+     3. PUT request to update a path  
+    `$ curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "fromCity": "Gopalganj", "toCity": "Moulvibazar", "container": 20, "transportType": "Road", "duration": 1, "cost": 120 }' 'http://localhost:8090/api/v1/paths/35'`
+
+     * Response body: 
+     ```     
+     {
+       "id": 35,
+       "fromCity": "Gopalganj",
+       "toCity": "Moulvibazar",
+       "container": 20,
+       "transportType": "Road",
+       "duration": 1,
+       "cost": 120
+     }
+     ```  
+     
+      4.	POST request to create a path  
+    `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "fromCity": "Gopalganj",  "toCity": "Moulvibazar",  "container": 20, "transportType": "Air", "duration": 1, "cost": 1220 }' 'http://localhost:8090/api/v1/paths'`
+
+     * Response body: 
+     ```  
+     {
+       "id": 36,
+       "fromCity": "Gopalganj",
+       "toCity": "Moulvibazar",
+       "container": 20,
+       "transportType": "Air",
+       "duration": 1,
+       "cost": 1220
+     }
+     ```
