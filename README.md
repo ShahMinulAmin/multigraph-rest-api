@@ -36,3 +36,46 @@ RESTful API to find all possible routes of a multigraph.
   * Detailed description of a REST API can be found clicking on the row of that API. Here is a sample screenshot:
   
   ![](../assets/images/swagger-rest-doc.png)
+
+### Using the REST API
+The REST APIs can be tested using popular REST client like Postman. Since Swagger is included in the project, the REST APIs can be tested from Swagger UI also. Another quick way to test the REST APIs is to use curl command. Some sample curl requests have been given in the following examples. Response body is also provided in most cases.
+  * City controller:
+    1. GET request to get list of all cities  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/cities'` 
+      
+    2. GET request to get one city by id  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/cities/1'`  
+      
+    * Response body:
+     ```
+     {
+       "id": 1,
+       "name": "Vasastan",
+       "latitude": 59.3442327,
+       "longitude": 18.0456211
+     }
+     ```  
+     3. PUT request to update a city  
+     `$ curl -X PUT --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{  "name": "Gopalganj", "latitude": 23.0488146, "longitude": 89.8879304 }' 'http://localhost:8090/api/v1/cities/13'`  
+       
+     * Response body:  
+      ```
+      {
+        "id": 13,
+        "name": "Gopalganj",
+        "latitude": 23.0488146,
+        "longitude": 89.8879304
+      }
+      ``` 
+      4.	POST request to create a city  
+      `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "name": "khulna",  "latitude": 22.845641, "longitude": 89.5403279 }' 'http://localhost:8090/api/v1/cities'`  
+  
+     * Response body:  
+      ```
+        {
+         "id": 15,
+         "name": "khulna",
+         "latitude": 22.845641,
+         "longitude": 89.5403279
+       }
+      ``` 
