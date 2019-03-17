@@ -24,9 +24,9 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 /**
  * Created by sajib on 2/21/19.
  */
@@ -66,8 +66,12 @@ public class SearchControllerTests {
                 .thenReturn(resultRouteList);
 
         // Act
-        ResultActions result = mockMvc.perform(post("/api/v1/routes").contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJson(searchParams)));
+        ResultActions result = mockMvc.perform(get("/api/v1/routes")
+                .param(JsonUtil.PARAM_FROM, "Vasastan")
+                .param(JsonUtil.PARAM_TO, "Liseberg")
+                .param(JsonUtil.PARAM_TRANSPORT_TYPES, "Road")
+                .param(JsonUtil.PARAM_CONTAINER, "20")
+                .contentType(MediaType.APPLICATION_JSON));
 
         // Assert
         result.andExpect(status().isOk())
@@ -112,8 +116,12 @@ public class SearchControllerTests {
                 .thenReturn(resultRouteList);
 
         // Act
-        ResultActions result = mockMvc.perform(post("/api/v1/routes").contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJson(searchParams)));
+        ResultActions result = mockMvc.perform(get("/api/v1/routes")
+                .param(JsonUtil.PARAM_FROM, "Himchari")
+                .param(JsonUtil.PARAM_TO, "Banani")
+                .param(JsonUtil.PARAM_TRANSPORT_TYPES, "Road")
+                .param(JsonUtil.PARAM_CONTAINER, "20")
+                .contentType(MediaType.APPLICATION_JSON));
 
         // Assert
         result.andExpect(status().isOk())
@@ -139,11 +147,12 @@ public class SearchControllerTests {
                 .thenReturn(resultRouteList);
 
         // Act
-        ResultActions result = mockMvc.perform(post("/api/v1/routes").contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.toJson(searchParams)));
+        ResultActions result = mockMvc.perform(get("/api/v1/routes")
+                .param(JsonUtil.PARAM_FROM, "Vasastan")
+                .param(JsonUtil.PARAM_TO, "Liseberg")
+                .contentType(MediaType.APPLICATION_JSON));
 
         // Assert
-        result.andExpect(status().isOk())
-                .andExpect(jsonPath("$.errorMessage", is(JsonResponses.JSON_RESPONSE_MANDATORY_PARAM_MISSING)));
+        result.andExpect(status().isBadRequest());
     }
 }
