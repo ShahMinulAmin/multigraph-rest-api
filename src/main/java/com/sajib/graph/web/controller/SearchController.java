@@ -6,10 +6,7 @@ import com.sajib.graph.types.SearchError;
 import com.sajib.graph.types.SearchResult;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,25 +33,27 @@ public class SearchController {
     SearchService searchService;
 
     @ApiOperation(value = "Find routes of multigraph with given source, destination and other parameters")
-    @PostMapping()
-    public Object routeSearch(@RequestBody SearchParams params) {
+    @GetMapping()
+    public Object routeSearch(@RequestParam(required = true) String from,
+                              @RequestParam(required = true) String to,
+                              @RequestParam(required = true) List<String> transportTypes,
+                              @RequestParam(required = true) Integer container,
+                              @RequestParam(required = false) Integer minDays,
+                              @RequestParam(required = false) Integer maxDays,
+                              @RequestParam(required = false) Integer minCost,
+                              @RequestParam(required = false) Integer maxCost) {
 
-        if (params.from == null || params.to == null || params.transportTypes == null
-                || params.container == null) {
-            return new SearchError("Mandatory parameter missing.");
-        }
-
-        if (params.transportTypes.contains("All")) {
-            params.transportTypes = new ArrayList<String>();
-            params.transportTypes.add("Road");
-            params.transportTypes.add("Ocean");
-            params.transportTypes.add("Air");
+        if (transportTypes.contains("All")) {
+            transportTypes = new ArrayList<String>();
+            transportTypes.add("Road");
+            transportTypes.add("Ocean");
+            transportTypes.add("Air");
         }
 
         // get the result by call search API
-        List<ResultRoute> combinedResultRouteList = searchService.searchFromLocation(params.from, params.to,
-                params.transportTypes, params.container, params.minDays, params.maxDays,
-                params.minCost, params.maxCost);
+        List<ResultRoute> combinedResultRouteList = searchService.searchFromLocation(from, to,
+                transportTypes, container, minDays, maxDays,
+                minCost, maxCost);
 
         return new SearchResult(combinedResultRouteList);
     }
