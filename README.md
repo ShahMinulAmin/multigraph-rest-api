@@ -132,8 +132,8 @@ The REST APIs can be tested using popular REST client like Postman. Since Swagge
      ```  
        
   * Search controller:
-    1. POST request to find all routes between a source and a destination.  
-    `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "container": 20, "from": "Vasastan", "to": "Maitland", "transportTypes": [ "Road", "Ocean" ] }' 'http://localhost:8090/api/v1/routes'`   
+    1. GET request to find all routes between a source and a destination.  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/routes?from=Vasastan&to=Maitland&transportTypes=Road&transportTypes=Ocean&container=20'`   
     * Response body:
      ```
      {
@@ -223,8 +223,8 @@ The REST APIs can be tested using popular REST client like Postman. Since Swagge
      }
      ```  
      
-    2. POST request to find all routes between a source and a destination. Here one location will not be directly available in the system. A nearby location will be used if it is available.  
-    `$ curl -X POST --header 'Content-Type: application/json' --header 'Accept: application/json' -d '{ "container": 20, "from": "Himchari", "to": "Banani", "transportTypes": [ "All" ] }' 'http://localhost:8090/api/v1/routes'`  
+    2. GET request to find all routes between a source and a destination. Here one location will not be directly available in the system. A nearby location will be used if it is available.  
+    `$ curl -X GET --header 'Accept: application/json' 'http://localhost:8090/api/v1/routes?from=Himchari&to=Banani&transportTypes=All&container=20'`  
       
     * Response body:
      ```
