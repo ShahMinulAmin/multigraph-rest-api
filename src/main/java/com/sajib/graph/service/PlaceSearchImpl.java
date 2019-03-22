@@ -2,7 +2,6 @@ package com.sajib.graph.service;
 
 import com.sajib.graph.core.GeoCodingUtil;
 import com.sajib.graph.dao.PreferenceDao;
-import com.sajib.graph.dao.SearchDAO;
 import com.sajib.graph.entity.Preference;
 import com.sajib.graph.types.*;
 import org.springframework.beans.factory.annotation.Autowired;

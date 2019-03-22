@@ -1,6 +1,6 @@
 package com.sajib.graph.service;
 
-import com.sajib.graph.dao.SearchDAO;
+import com.sajib.graph.dao.PathDao;
 import com.sajib.graph.entity.City;
 import com.sajib.graph.entity.Path;
 import com.sajib.graph.types.Coordinate;
@@ -25,7 +25,7 @@ public class SearchServiceImpl implements SearchService {
     private static final Logger LOG = Logger.getLogger(SearchServiceImpl.class.getName());
 
     @Autowired
-    private SearchDAO searchDAO;
+    private PathDao pathDao;
     @Autowired
     private PlaceSearch placeSearch;
     @Autowired
@@ -97,6 +97,6 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Path> getPathsBy(Integer containerSize, List<String> modeOfTransports) {
-        return searchDAO.getPathsBy(containerSize, modeOfTransports);
+        return pathDao.getPathsBy(containerSize, modeOfTransports);
     }
 }
