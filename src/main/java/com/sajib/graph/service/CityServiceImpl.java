@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -31,11 +32,11 @@ public class CityServiceImpl implements CityService {
 
     @Override
     public City getCity(Integer id) throws ResourceNotFoundException {
-        City city = cityDao.findOne(id);
-        if (city == null) {
+        Optional<City> city = cityDao.findById(id);
+        if (!city.isPresent()) {
             throw new ResourceNotFoundException("City not found for this id: " + id);
         }
-        return city;
+        return city.get();
     }
 
     @Override

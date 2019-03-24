@@ -1,5 +1,6 @@
 package com.sajib.graph.dao;
 
+import com.sajib.graph.entity.City;
 import com.sajib.graph.entity.Path;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by sajib on 2/19/19.
@@ -15,6 +17,8 @@ import java.util.List;
 @Repository
 @Transactional
 public interface PathDao extends CrudRepository<Path, Integer> {
+
+    Optional<Path> findById(Integer id);
 
     @Query("select path from Path path WHERE path.container = :containerSize AND path.transportType IN (:modeOfTransports)")
     public List<Path> getPathsBy(@Param("containerSize") Integer containerSize, @Param("modeOfTransports") List<String> modeOfTransports);

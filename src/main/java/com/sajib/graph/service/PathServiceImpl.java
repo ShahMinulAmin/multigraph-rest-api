@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
@@ -31,11 +32,11 @@ public class PathServiceImpl implements PathService {
 
     @Override
     public Path getPath(Integer id) throws ResourceNotFoundException {
-        Path path = pathDao.findOne(id);
-        if (path == null) {
+        Optional<Path> path = pathDao.findById(id);
+        if (!path.isPresent()) {
             throw new ResourceNotFoundException("Path not found for this id: " + id);
         }
-        return path;
+        return path.get();
     }
 
     @Override
