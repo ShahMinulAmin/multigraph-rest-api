@@ -3,6 +3,7 @@ package com.sajib.graph.web.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by sajib on 2/18/19.
@@ -10,6 +11,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class CityDto {
     private Integer id;
     private String name;
